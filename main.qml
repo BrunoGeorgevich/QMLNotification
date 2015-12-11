@@ -4,8 +4,8 @@ import QtQuick.Controls 1.2
 
 ApplicationWindow {
     visible:true
-    height:800
-    width:600
+    height:700
+    width:500
 
     ColumnLayout {
         anchors.centerIn: parent
@@ -31,14 +31,19 @@ ApplicationWindow {
                     id:txtInput
 
                     anchors.fill: parent
-
+                    text: "HIsdjasjdioasjdoiasjodasjio"
                     verticalAlignment: TextInput.AlignVCenter
                     clip: true
                 }
             }
 
             CheckBox {
-                id:checkBox
+                id:checkBoxOnTheTop
+                checked: true
+            }
+
+            CheckBox {
+                id:checkBoxCentralized
                 checked: true
             }
         }
@@ -50,7 +55,7 @@ ApplicationWindow {
 
             maximumValue: 1
             minimumValue: 0
-            value: 0.7
+            value: 0.99
 
         }
 
@@ -63,6 +68,14 @@ ApplicationWindow {
             minimumValue: 1000
             value: 2000
 
+        }
+
+        Button {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            text:"Notification!"
+            onClicked: notifySystem.notify(txtInput.text)
         }
 
         Button {
@@ -93,7 +106,8 @@ ApplicationWindow {
     NotificationSystem {
         id:notifySystem
         timeInterval: intervalSlider.value
-        onTheTop: checkBox.checked
+        isOnTheTop: checkBoxOnTheTop.checked
+        centralized: checkBoxCentralized.checked
         opacity: opacitySlider.value
     }
 }
